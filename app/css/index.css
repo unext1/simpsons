@@ -77,6 +77,21 @@ html, body {
   text-transform: uppercase;
   color: #003566;
 }
+.card button {
+  margin-top: 10px;
+  padding: 5px 15px 5px 15px;
+  background-color: #ffc300;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+.card button:hover {
+  background-color: #003566;
+}
+.card button:active {
+  transform: translateY(2px);
+}
 
 .searchForm input {
   padding: 10px;
@@ -115,6 +130,10 @@ html, body {
   height: 50px;
   width: 100%;
   background-color: #ffc300;
+}
+
+.quoteDiv {
+  text-align: center;
 }
 
 @media (max-width: 768px) {
