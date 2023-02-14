@@ -2,11 +2,13 @@ import { Link } from "@remix-run/react";
 
 const Navbar = () => {
   return (
-    <div className="nav">
+    <header>
       <div className="container">
-        <Link to="/">Navbar</Link>
+        <Link to="/">
+          <h1>Simpsons Quotes</h1>
+        </Link>
       </div>
-    </div>
+    </header>
   );
 };
 

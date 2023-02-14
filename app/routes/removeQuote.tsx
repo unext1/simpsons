@@ -16,11 +16,11 @@ export async function action({ request }: ActionArgs) {
   const quoteID =
     Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
 
-  await redis.set(quoteID, values);
-
   let array: string[] = favoriteQuotesCookie || [];
 
-  array.push(quoteID);
+  array.filter((i) => i !== values);
+
+  await redis.set(quoteID, values);
 
   return json(
     {},

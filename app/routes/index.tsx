@@ -79,10 +79,12 @@ const Index = () => {
         </Form>
       </div>
       <div className="quoteDiv">
-        <h1>Your Favorite quotes</h1>
-        {quoteList
-          ? quoteList.map((i) => <div key={i}>{i}</div>)
-          : "You dont have any favorite quotes"}
+        <h2>Your Favorite quotes</h2>
+        <ul>
+          {quoteList
+            ? quoteList.map((i) => <li key={i}>{i}</li>)
+            : "You dont have any favorite quotes"}
+        </ul>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from "@remix-run/react";
+import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 
 import globalStyles from "./css/index.css";
@@ -28,6 +29,7 @@ export default function App() {
     <Document>
       <Navbar />
       <Outlet />
+      <Footer />
     </Document>
   );
 }
