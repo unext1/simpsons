@@ -1,4 +1,4 @@
-import { json, type LoaderFunction, type LoaderArgs } from "@remix-run/node";
+import { json, type LoaderArgs } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
 export interface QuoteApi {
@@ -8,7 +8,7 @@ export interface QuoteApi {
   characterDirection: string;
 }
 
-export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const charName = url.pathname.split("/")[2];
 
@@ -16,14 +16,12 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     `https://thesimpsonsquoteapi.glitch.me/quotes?character=${charName}&count=100`
   );
 
-  const quote: QuoteApi = await quoteData.json();
+  const quote: QuoteApi[] = await quoteData.json();
 
   return json({ quote });
 };
 const CharacterPage = () => {
-  const { quote } = useLoaderData<{
-    quote: QuoteApi[];
-  }>();
+  const { quote } = useLoaderData<typeof loader>();
   if (!quote || !quote[0]) {
     return (
       <>
@@ -37,7 +35,7 @@ const CharacterPage = () => {
         <div className="container characterDiv">
           <h1>{quote[0].character}</h1>
           <img src={quote[0].image} alt="characterImg" />
-        </div>{" "}
+        </div>
         <div className="quoteDiv">
           <h2>All {quote[0].character} quotes</h2>
           <ul>

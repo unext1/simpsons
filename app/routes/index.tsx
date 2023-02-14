@@ -6,11 +6,11 @@ import {
   useLoaderData,
   useTransition,
 } from "@remix-run/react";
-import { Redis } from "@upstash/redis";
 import { json } from "react-router";
-import { favoriteQuotes } from "~/utils/cookies";
+import { favoriteQuotes } from "~/utils/cookies.server";
+import { redis } from "~/utils/redis.server";
 
-export interface QuoteApi {
+interface QuoteApi {
   quote: string;
   character: string;
   image: string;
@@ -18,18 +18,15 @@ export interface QuoteApi {
 }
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  });
-
   const cookieHeader = request.headers.get("Cookie");
   const favoriteQuotesList: string[] = await favoriteQuotes.parse(cookieHeader);
+
   let quoteList;
+
   if (favoriteQuotesList) {
     quoteList = await Promise.all(
       favoriteQuotesList.map(async (i) => {
-        return await redis.get(i);
+        return await { id: i, quote: await redis.get(i) };
       })
     );
   }
@@ -45,20 +42,26 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     : `${apiUrl}`;
 
   const quoteData = await fetch(fetchURL);
-  const quote: QuoteApi = await quoteData.json();
+  const quote: QuoteApi[] = await quoteData.json();
 
   return json({ quote, quoteList });
 };
 
 const Index = () => {
-  const { quote, quoteList } = useLoaderData<{
-    quote: QuoteApi[];
-    quoteList: string[];
-  }>();
-
+  const { quote, quoteList } = useLoaderData<typeof loader>();
   let transition = useTransition();
   const busy = transition.submission;
 
+  const fetcher = useFetcher();
+
+  const removeFav = ({ quote }: any) => {
+    fetcher.submit(
+      { value: quote },
+      { method: "post", action: "/removeQuote" }
+    );
+  };
+
+  console.log(quoteList);
   return (
     <div>
       <div className="flexDiv container">
@@ -82,7 +85,16 @@ const Index = () => {
         <h2>Your Favorite quotes</h2>
         <ul>
           {quoteList
-            ? quoteList.map((i) => <li key={i}>{i}</li>)
+            ? quoteList.map((i: any) => (
+                <li key={i.id}>
+                  <div>
+                    {i.quote}{" "}
+                    <button onClick={() => removeFav({ quote: i.id })}>
+                      X
+                    </button>
+                  </div>
+                </li>
+              ))
             : "You dont have any favorite quotes"}
         </ul>
       </div>
@@ -96,7 +108,7 @@ export const Cards = ({ quote }: { quote: QuoteApi[] }) => {
 
   const fetcher = useFetcher();
 
-  const onClick = ({ quote }: any) =>
+  const addFav = ({ quote }: any) =>
     fetcher.submit({ value: quote }, { method: "post", action: "/saveQuote" });
 
   return (
@@ -112,7 +124,7 @@ export const Cards = ({ quote }: { quote: QuoteApi[] }) => {
                   <div>
                     <p>{i.character}</p>
                     <h1>{i.quote}</h1>
-                    <button onClick={() => onClick({ quote: i.quote })}>
+                    <button onClick={() => addFav({ quote: i.quote })}>
                       Favorite
                     </button>
                   </div>

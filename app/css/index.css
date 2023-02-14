@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +137,7 @@ header {
   background-color: #ffc300;
   padding-top: 15px;
   padding-bottom: 15px;
+  font-family: "Rock Salt";
 }
 header h1 {
   color: white;
@@ -147,6 +149,7 @@ footer {
   background-color: #ffc300;
   padding-top: 15px;
   padding-bottom: 15px;
+  font-family: "Rock Salt";
 }
 footer p {
   font-size: 15px;
@@ -175,13 +178,15 @@ footer p {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-radius: 7px;
   background-color: #66b6ff;
 }
 .characterDiv img {
   margin-top: 20px;
-  height: 350px;
-  width: 300px;
+  height: 250px;
+  width: 200px;
 }
 
 @media (max-width: 768px) {

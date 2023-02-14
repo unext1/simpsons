@@ -1,32 +1,35 @@
-# Remix
+# Simpsons Quote Website
 
-This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+A simple website using [Remix](https://remix.run/), [Redis](https://redis.io/) and [SimpsonsAPI](https://thesimpsonsquoteapi.glitch.me/).
 
-## Deploy Your Own
+The website was build as a final project for "SCSS/AJAX" course.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/remix&template=remix)
+## Technologies
 
-_Live Example: https://remix-run-template.vercel.app_
+- TypeScript
+- SASS
+- Redis
+- RemixJs
 
-You can also deploy using the [Vercel CLI](https://vercel.com/cli):
+## Run it Locally
+
+Start by git cloning the repo
+
+To run website locally u will need to setup the environmental keys for [Redis](https://redis.io/)
 
 ```sh
-npm i -g vercel
-vercel
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
 ```
 
-## Development
-
-To run your Remix app locally, make sure your project's local dependencies are installed:
+Afterwards install node modules
 
 ```sh
 npm install
 ```
 
-Afterwards, start the Remix development server like so:
+And finally run the site ! [http://localhost:3000](http://localhost:3000)
 
 ```sh
 npm run dev
 ```
-
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!

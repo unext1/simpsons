@@ -1,6 +1,6 @@
 import { Redis } from "@upstash/redis";
 import { type ActionArgs, json } from "@remix-run/node";
-import { favoriteQuotes } from "~/utils/cookies";
+import { favoriteQuotes } from "~/utils/cookies.server";
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,
@@ -10,23 +10,20 @@ const redis = new Redis({
 export async function action({ request }: ActionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const favoriteQuotesCookie = await favoriteQuotes.parse(cookieHeader);
-  const formData = await request.formData();
-  const values = Object.fromEntries(formData).value;
-
-  const quoteID =
-    Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
-
   let array: string[] = favoriteQuotesCookie || [];
 
-  array.filter((i) => i !== values);
+  const formData = await request.formData();
+  const quoteID = Object.fromEntries(formData).value as string;
+  console.log(quoteID);
+  const newArr = array.filter((i) => i !== quoteID);
 
-  await redis.set(quoteID, values);
+  await redis.del(quoteID);
 
   return json(
     {},
     {
       headers: {
-        "Set-Cookie": await favoriteQuotes.serialize(array),
+        "Set-Cookie": await favoriteQuotes.serialize(newArr),
       },
     }
   );
