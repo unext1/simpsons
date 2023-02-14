@@ -1,4 +1,4 @@
-import { type LoaderArgs, LoaderFunction } from "@remix-run/node";
+import { type LoaderArgs, type LoaderFunction } from "@remix-run/node";
 import { Form, Link, useLoaderData, useTransition } from "@remix-run/react";
 import { json } from "react-router";
 
@@ -20,8 +20,6 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     ? `${apiUrl}?character=${search}&count=${count}`
     : `${apiUrl}`;
 
-  console.log(fetchURL);
-
   const quoteData = await fetch(fetchURL);
   const quote: QuoteApi = await quoteData.json();
 
@@ -36,12 +34,18 @@ const Index = () => {
   const busy = transition.submission;
 
   return (
-    <div className="flexDiv">
+    <div className="flexDiv container">
       <Cards quote={quote} />
-      <Form action="">
-        <div className="searchDiv">
-          <input type="text" name="search" placeholder="Find quote" />
-          <input type="text" name="count" placeholder="count" />
+      <Form action="" className="searchForm">
+        <div>
+          <div>
+            <p>Character </p>
+            <input type="text" name="search" placeholder="Character" />
+          </div>
+          <div>
+            <p>How many quotes </p>
+            <input type="text" name="count" placeholder="Count" />
+          </div>
         </div>
         <button type="submit">{busy ? "Loading..." : "Submit"}</button>
       </Form>
@@ -54,17 +58,17 @@ export const Cards = ({ quote }: { quote: QuoteApi[] }) => {
   const busy = transition.submission;
 
   return (
-    <div className="cardDiv">
+    <div className="cardDiv ">
       {!busy ? (
         <div>
           {!quote || !quote[0] ? (
-            <h1>No found data</h1>
+            <h1>This Character Does Not Exsist</h1>
           ) : (
             quote.map((i) => (
               <div key={i.quote} className="card">
                 <div>
-                  <h1>{i.quote}</h1>
                   <p>{i.character}</p>
+                  <h1>{i.quote}</h1>
                 </div>
                 <div>
                   <Link to={`/character/${i.character}`}>
@@ -76,7 +80,7 @@ export const Cards = ({ quote }: { quote: QuoteApi[] }) => {
           )}
         </div>
       ) : (
-        <div>Fetching data</div>
+        <h1>Fetching data</h1>
       )}
     </div>
   );

@@ -1,7 +1,11 @@
+import { Link } from "@remix-run/react";
+
 const Navbar = () => {
   return (
-    <div>
-      <h1>Ok</h1>
+    <div className="nav">
+      <div className="container">
+        <Link to="/">Navbar</Link>
+      </div>
     </div>
   );
 };

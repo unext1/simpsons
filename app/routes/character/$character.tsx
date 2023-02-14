@@ -33,7 +33,7 @@ const CharacterPage = () => {
     );
   } else
     return (
-      <div>
+      <div className="container">
         <h1>{quote[0].character}</h1>
         <img src={quote[0].image} alt="characterImg" />
         <div>

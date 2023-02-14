@@ -3,32 +3,131 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
+  outline-style: none !important;
 }
 
 html, body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
-  background-color: #ffd60a;
 }
 
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
 .flexDiv {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .cardDiv {
   overflow: scroll;
-  height: 50vh;
+  height: 80vh;
   scroll-snap-type: both mandatory;
 }
 
 .card {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 50px;
+  gap: 5px;
   margin-bottom: 50px;
+  background-color: #66b6ff;
+  padding: 20px;
+  border-radius: 7px;
+}
+.card img {
+  height: 250px;
+}
+.card h1 {
+  font-size: 24px;
+}
+.card p {
+  margin-bottom: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #003566;
+}
+
+.searchForm input {
+  padding: 10px;
+  border-radius: 7px;
+  border: solid 2px #ffc300;
+  margin-bottom: 10px;
+}
+.searchForm input:hover {
+  border: solid 2px #66b6ff;
+}
+.searchForm input:focus {
+  border: solid 2px #66b6ff;
+}
+.searchForm p {
+  margin-bottom: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #003566;
+}
+.searchForm button {
+  padding: 10px 30px 10px 30px;
+  background-color: #66b6ff;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+.searchForm button:hover {
+  background-color: #003566;
+}
+.searchForm button:active {
+  transform: translateY(2px);
+}
+
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #ffc300;
+}
+
+@media (max-width: 768px) {
+  .flexDiv {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .card {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 50px;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

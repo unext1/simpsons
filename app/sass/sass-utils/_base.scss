@@ -5,14 +5,12 @@
 	padding: 0;
 	list-style: none;
 	text-decoration: none;
+	outline-style: none !important;
 }
 
 html, body {
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
-    background-color: vars.$secondary-yellow;
+    // background-color: vars.$secondary-yellow;
 }
-
-
-
 

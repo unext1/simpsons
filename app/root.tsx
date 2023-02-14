@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from "@remix-run/react";
+import Navbar from "./components/navbar";
 
 import globalStyles from "./css/index.css";
 
@@ -25,6 +26,7 @@ export function meta() {
 export default function App() {
   return (
     <Document>
+      <Navbar />
       <Outlet />
     </Document>
   );
