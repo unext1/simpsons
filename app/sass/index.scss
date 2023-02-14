@@ -1,0 +1,24 @@
+@use "base";
+
+
+.flexDiv {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    // margin: 20px;
+    overflow: hidden;
+}
+
+.cardDiv {
+    overflow: scroll;
+    height: 50vh;
+    scroll-snap-type: both mandatory;
+}
+
+.card{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
