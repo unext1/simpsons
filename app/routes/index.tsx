@@ -61,7 +61,6 @@ const Index = () => {
     );
   };
 
-  console.log(quoteList);
   return (
     <div>
       <div className="flexDiv container">
