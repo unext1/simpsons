@@ -53,9 +53,10 @@ html, body {
   background-color: #66b6ff;
   margin-bottom: 50px;
   color: white;
-  font-size: 28px;
+  font-size: 20px;
   text-transform: uppercase;
   background-image: url("https://i.pinimg.com/originals/ad/1e/2c/ad1e2c0c93696b30a9a6c916cb73d4b7.jpg");
+  font-family: "Rock Salt", Arial, Helvetica, sans-serif;
 }
 
 .charMain {
