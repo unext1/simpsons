@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (favoriteQuotesList) {
     quoteList = await Promise.all(
       favoriteQuotesList.map(async (i) => {
-        return await { id: i, quote: await redis.get(i) };
+        return { id: i, quote: await redis.get(i) };
       })
     );
   }
@@ -87,7 +87,7 @@ const Index = () => {
             ? quoteList.map((i: any) => (
                 <li key={i.id}>
                   <div>
-                    {i.quote}{" "}
+                    {i.quote}
                     <button onClick={() => removeFav({ quote: i.id })}>
                       X
                     </button>

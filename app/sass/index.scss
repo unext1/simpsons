@@ -7,6 +7,10 @@
     gap: $gap;
 }
 
+.charMain{
+    height: 100vh
+}
+
 .flexDiv {
     @include grid(20px,2);
     overflow: hidden;
@@ -42,6 +46,25 @@
     button {
         margin-top: 10px;
         padding: 5px 15px 5px 15px;
+        background-color: $main-yellow;
+        text-transform: uppercase;
+        color: white;
+        border: none;
+        border-radius: $border-radius;
+        &:hover {
+            background-color: $secondary-blue;
+        }
+        &:active {
+            transform: translateY(2px)
+          }
+    }
+}
+
+.quoteDiv {
+    button {
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 8px;
         background-color: $main-yellow;
         text-transform: uppercase;
         color: white;
