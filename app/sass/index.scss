@@ -7,6 +7,21 @@
     gap: $gap;
 }
 
+.heroSection {
+    height: 500px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: $main-blue;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 28px;
+    text-transform: uppercase;
+    background-image: url("https://i.pinimg.com/originals/ad/1e/2c/ad1e2c0c93696b30a9a6c916cb73d4b7.jpg");
+}
+
 .charMain{
     height: 100vh
 }
@@ -30,6 +45,7 @@
     background-color: $main-blue;
     padding: 20px;
     border-radius: $border-radius;
+    color: white;
 
     img {
         height: 250px;
@@ -88,6 +104,7 @@
         border-radius: $border-radius;
         border: solid 2px $main-yellow;
         margin-bottom: 10px;
+        width: 300px;
         &:hover {
             border: solid 2px $main-blue;
 
@@ -162,20 +179,35 @@ footer {
     }
 }
 
+.nav {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        font-size: 12px;
+        color:black
+    }
+}
+
+.favoriteDiv {
+    height: 100vh;
+}
+
 .characterDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 100px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     border-radius: $border-radius;
     background-color: $main-blue;
+    color:white;
     
     img {
         margin-top: 20px;
-        height: 250px;
+        height: 300px;
         width: 200px;
     }
 

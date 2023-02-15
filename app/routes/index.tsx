@@ -39,12 +39,19 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 
   let fetchURL = search
     ? `${apiUrl}?character=${search}&count=${count}`
-    : `${apiUrl}`;
+    : `${apiUrl}?count=2`;
 
   const quoteData = await fetch(fetchURL);
   const quote: QuoteApi[] = await quoteData.json();
 
-  return json({ quote, quoteList });
+  return json(
+    { quote, quoteList },
+    {
+      headers: {
+        "Cache-Control": `public, max-age=${100}, s-maxage=${10 * 100}`,
+      },
+    }
+  );
 };
 
 const Index = () => {
@@ -63,6 +70,9 @@ const Index = () => {
 
   return (
     <div>
+      <div className="heroSection">
+        <h1>The Simpsons</h1>
+      </div>
       <div className="flexDiv container">
         <Cards quote={quote} />
 
@@ -104,9 +114,7 @@ const Index = () => {
 export const Cards = ({ quote }: { quote: QuoteApi[] }) => {
   let transition = useTransition();
   const busy = transition.submission;
-
   const fetcher = useFetcher();
-
   const addFav = ({ quote }: any) =>
     fetcher.submit({ value: quote }, { method: "post", action: "/saveQuote" });
 
