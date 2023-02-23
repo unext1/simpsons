@@ -17,9 +17,6 @@ export async function action({ request }: ActionArgs) {
   await redis.set(quoteID, values);
   array.push(quoteID);
 
-  console.log(array);
-  console.log("THIS RUN");
-
   return json(
     {},
     {
